@@ -7,6 +7,7 @@ Aplicativo com o objetivo de conectar pacientess e farmácias em um lugar só, a
 - Java
 - SpringBoot
 - Flutter
+- Dart
 - PostgresSQL
 - Postman
 - Docker

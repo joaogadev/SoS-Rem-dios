@@ -35,7 +35,7 @@ create table address (
 
 create table pharmacies (
     id uuid primary key default gen_random_uuid(),
-    owner_id uuid not null references Users(id),
+    owner_id uuid not null references users(id),
     name varchar(255) not null,
     cnpj varchar(14) not null unique,
     phone varchar(20),
@@ -50,7 +50,7 @@ create table pharmacies (
 create table employees (
     id uuid primary key default gen_random_uuid(),
     pharmacy_id uuid references pharmacies(id),
-    user_id uuid references Users(id),
+    user_id uuid references users(id),
     created_at timestamp default current_timestamp,
     positiion varchar(255) not null default 'Employee',
     unique (user_id, pharmacy_id)
@@ -88,7 +88,7 @@ create type reservation_status as enum (
 
 create table reservations (
     id uuid primary key default gen_random_uuid(),
-    customer_id uuid references Users(id),
+    customer_id uuid references users(id),
     pharmacy_medicine_id uuid references pharmacy_medicines(id),
     quantity integer not null check (quantity > 0),
     status reservation_status not null default 'PENDING',
@@ -100,7 +100,7 @@ create table reservations (
 
 create table favorites (
     id uuid primary key default gen_random_uuid(),
-    user_id uuid references Users(id),
+    user_id uuid references users(id),
     pharmacy_id uuid references pharmacies(id),
     created_at timestamp default current_timestamp,
     unique (user_id, pharmacy_id)
@@ -108,7 +108,7 @@ create table favorites (
 
 create table notifications (
     id uuid primary key default gen_random_uuid(),
-    user_id uuid references Users(id),
+    user_id uuid references users(id),
     title varchar(255) not null default 'SOS Remédio Notification',
     message varchar(500) not null,
     is_read boolean not null default false,

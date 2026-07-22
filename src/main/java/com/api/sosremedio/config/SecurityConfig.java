@@ -1,5 +1,6 @@
 package com.api.sosremedio.config;
 
+import com.api.sosremedio.services.UserDetailServices;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.servlet.DispatcherType;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,6 +27,7 @@ import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Configuration
@@ -37,17 +41,29 @@ public class SecurityConfig {
     //Transforma chave do properties em chava entendivel pelo java
     //reusmindo um conversão, ja q o o secretKey nn recebe string
     public SecretKey jwtSecretkey() {
-        byte[] keyBytes = Base64
+        //Aplicação só pra conseguir rodar com chave de teste
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        /*byte[] keyBytes = Base64
                 .getDecoder()
-                .decode(jwtSecret);
+                .decode(jwtSecret);*/
         return new SecretKeySpec(keyBytes, "HmacSHA256");
     }
 
 
     @Bean
     //esse cara válida todo o processo de login
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailServices userDetailServices, PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailServices);
+
+        //validando as senhas
+        provider.setPasswordEncoder(passwordEncoder);
+
+        return  provider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(DaoAuthenticationProvider daoAuthenticationProvider) {
+        return new ProviderManager(daoAuthenticationProvider);
     }
     @Bean
     //gera token jwt

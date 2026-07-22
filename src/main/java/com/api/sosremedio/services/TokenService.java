@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class TokenService {
@@ -40,7 +41,7 @@ public class TokenService {
                 .expiresAt(expiresAt)
                 .subject(userModel.getId().toString())
                 .claim("email", userModel.getEmail())
-                .claim("role", userModel.getRole().name())
+                .claim("role", List.of(userModel.getRole().name()))
                 .build();
 
         JwsHeader header = JwsHeader

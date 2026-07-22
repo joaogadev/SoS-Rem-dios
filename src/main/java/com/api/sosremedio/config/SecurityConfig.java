@@ -22,6 +22,8 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 
@@ -73,6 +75,23 @@ public class SecurityConfig {
     }
 
     @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+
+        //lê as permissoes dos claims com role
+        authoritiesConverter.setAuthoritiesClaimName("role");
+        //quando ver alguma role trasnforme em ROLE_ROLE_NAME
+        authoritiesConverter.setAuthorityPrefix("ROLE_");
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+
+        //transformfa jwt em objeto auhtentication
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+
+        return jwtAuthenticationConverter;
+    }
+
+    @Bean
     //válida token recebido
     public JwtDecoder jwtDencoder(SecretKey jwtSecretKey) {
         return NimbusJwtDecoder
@@ -116,12 +135,9 @@ public class SecurityConfig {
                 //responsavel por informar ao spring que a api é protegida por barear token
                 .oauth2ResourceServer(oathh2 ->
                         oathh2.jwt(
-                                jwt -> {}
-                                //vazia para manter a configuração padrão
+                                //Spring valida JWT e também converte o claim "role" em authority
+                                jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
                         ));
         return http.build();
-
-
-
     }
 }

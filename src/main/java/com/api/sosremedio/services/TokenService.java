@@ -22,8 +22,8 @@ public class TokenService {
 
     public TokenService (
             JwtEncoder jwtEncoder,
-            @Value("${app.jwt.issuer=sos-remedio-api}") String issuer,
-            @Value("${app.jwt.expiration-minutes=60}") long expirationMinutes
+            @Value("${app.jwt.issuer:sos-remedio-api}") String issuer,
+            @Value("${app.jwt.expiration-minutes:60}") long expirationMinutes
     ) {
         this.jwtEncoder = jwtEncoder;
         this.issuer = issuer;

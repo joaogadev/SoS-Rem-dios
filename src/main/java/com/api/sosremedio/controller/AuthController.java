@@ -1,5 +1,7 @@
 package com.api.sosremedio.controller;
 
+import com.api.sosremedio.DTO.LoginRequest;
+import com.api.sosremedio.DTO.LoginResponse;
 import com.api.sosremedio.DTO.RegisterRequest;
 import com.api.sosremedio.DTO.UserResponse;
 import com.api.sosremedio.services.AuthServices;
@@ -20,6 +22,13 @@ public class AuthController {
         UserResponse user = authServices.register(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse login = authServices.Login(request);
+
+        return ResponseEntity.ok(login);
     }
     @GetMapping("/test")
     public ResponseEntity<String> test() {

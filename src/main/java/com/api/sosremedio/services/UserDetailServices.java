@@ -3,12 +3,13 @@ package com.api.sosremedio.services;
 import com.api.sosremedio.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor //gera construtor para final's
-public class UserDetailServices {
+public class UserDetailServices implements UserDetailsService {
     private final UserRepository userRepository;
 
     //encontra e devolve o UserModel que implementa o userDetails

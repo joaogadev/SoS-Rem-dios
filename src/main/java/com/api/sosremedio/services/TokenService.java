@@ -12,18 +12,24 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class TokenService {
 
     private final JwtEncoder jwtEncoder;
+    private final String issuer;
+    private final long expirationMinutes;
 
-    @Value("${app.jwt.issuer}")
-    private String issuer;
-
-    @Value("${jwt.expiration.minutes}")
-    private long expirationMinutes;
+    public TokenService (
+            JwtEncoder jwtEncoder,
+            @Value("${app.jwt.issuer:sos-remedio-api}") String issuer,
+            @Value("${app.jwt.expiration-minutes:60}") long expirationMinutes
+    ) {
+        this.jwtEncoder = jwtEncoder;
+        this.issuer = issuer;
+        this.expirationMinutes = expirationMinutes;
+    }
 
     public LoginResponse generatedToken(UserModel userModel) {
         Instant now  = Instant.now();
@@ -35,7 +41,7 @@ public class TokenService {
                 .expiresAt(expiresAt)
                 .subject(userModel.getId().toString())
                 .claim("email", userModel.getEmail())
-                .claim("role", userModel.getRole().name())
+                .claim("role", List.of(userModel.getRole().name()))
                 .build();
 
         JwsHeader header = JwsHeader

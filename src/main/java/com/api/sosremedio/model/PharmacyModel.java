@@ -37,7 +37,7 @@ public class PharmacyModel {
 
     @JoinColumn(name = "address_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private AdressModel address;
+    private AddressModel address;
 
     @Column(name = "opening_hours")
     private LocalTime openingHours;
@@ -59,7 +59,7 @@ public class PharmacyModel {
             String cnpj,
             String phone,
             String email,
-            AdressModel address,
+            AddressModel address,
             LocalTime openingHours,
             LocalTime closingHours
     ) {

@@ -9,7 +9,7 @@ import java.util.UUID;
 public record UserResponse(
         UUID id,
         String nome,
-        String emial,
+        String email,
         String phone,
         UserRole role
 ) {

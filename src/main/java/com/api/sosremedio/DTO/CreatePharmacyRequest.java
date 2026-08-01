@@ -1,6 +1,5 @@
 package com.api.sosremedio.DTO;
 
-import com.api.sosremedio.model.AdressModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -34,7 +33,7 @@ public record CreatePharmacyRequest(
 
         @NotNull(message = "O endereço não pode ser vazio")
         @Valid
-        CreatedAddressRequest adress,
+        CreatedAddressRequest address,
 
         @NotNull(message = "Insira o horário de abertura")
         @JsonFormat(pattern = "HH:mm")

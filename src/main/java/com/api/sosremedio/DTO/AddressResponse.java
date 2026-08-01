@@ -1,5 +1,7 @@
 package com.api.sosremedio.DTO;
 
+import com.api.sosremedio.model.AddressModel;
+
 public record AddressResponse(
         String zipcode,
         String state,
@@ -9,4 +11,15 @@ public record AddressResponse(
         String number,
         String complement
 ) {
+    public static AddressResponse from(AddressModel address) {
+        return new AddressResponse(
+                address.getZipcode(),
+                address.getState(),
+                address.getCity(),
+                address.getNeighborhood(),
+                address.getStreet(),
+                address.getNumber(),
+                address.getComplement()
+        );
+    }
 }

@@ -8,4 +8,6 @@ import java.util.UUID;
 public interface PharmacyRepository extends JpaRepository<PharmacyModel, UUID> {
     boolean existsByIdAndOwnerId(UUID pharmacyId, UUID ownerId);
 
+    boolean existsByCnpj(String cnpj);
+    boolean existsByEmail(String email);
 }

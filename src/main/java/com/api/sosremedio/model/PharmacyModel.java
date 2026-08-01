@@ -72,4 +72,15 @@ public class PharmacyModel {
         this.openingHours = openingHours;
         this.closingHours = closingHours;
     }
+
+    public void updateData(
+            String name, String cnpj, String phone, String email, LocalTime openingHours, LocalTime closingHours
+    ) {
+        this.name = name;
+        this.cnpj = cnpj;
+        this.phone = phone;
+        this.email = email;
+        this.openingHours = openingHours;
+        this.closingHours = closingHours;
+    }
 }

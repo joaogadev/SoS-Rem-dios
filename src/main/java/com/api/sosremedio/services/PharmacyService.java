@@ -1,7 +1,7 @@
 package com.api.sosremedio.services;
 
-import com.api.sosremedio.DTO.CreatePharmacyRequest;
-import com.api.sosremedio.DTO.PharmacyResponse;
+import com.api.sosremedio.dto.request.CreatePharmacyRequest;
+import com.api.sosremedio.dto.response.PharmacyResponse;
 import com.api.sosremedio.model.AddressModel;
 import com.api.sosremedio.model.PharmacyModel;
 import com.api.sosremedio.model.UserModel;

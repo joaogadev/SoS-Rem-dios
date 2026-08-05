@@ -18,12 +18,12 @@ public class PharmacyPermissionService {
     private final EmployeeRepository employeeRepository;
     private final CurrentUserService currentUserService;
 
-    public void validateOwnerOrEmployeer (UUID pharmacyID) {
+    public void validateOwnerOrEmployee(UUID pharmacyID) {
         UUID currentUserId = currentUserService.getCurrentUserId();
 
-        boolean isOwner = pharmacyRepository.existsByIdAndOwnerId(pharmacyID, currentUserId);
+        boolean isOwner = pharmacyRepository.existsByIdAndOwner_id(pharmacyID, currentUserId);
 
-        boolean isEmployee = employeeRepository.existsPharmacyByIdAndUserId(pharmacyID, currentUserId);
+        boolean isEmployee = employeeRepository.existsPharmacyBy_IdAndUser_Id(pharmacyID, currentUserId);
 
         if (!isOwner && !isEmployee) {
             throw new AccessDeniedException("You havent access to this pharmacy");
@@ -33,7 +33,7 @@ public class PharmacyPermissionService {
     public void validateOwner (UUID pharmacyId) {
         UUID currentUserId = currentUserService.getCurrentUserId();
 
-        boolean isOwner = pharmacyRepository.existsByIdAndOwnerId(currentUserId, pharmacyId);
+        boolean isOwner = pharmacyRepository.existsByIdAndOwner_id(pharmacyId, currentUserId);
 
         if (!isOwner) {
             throw new AccessDeniedException("You havent access to this pharmacy");

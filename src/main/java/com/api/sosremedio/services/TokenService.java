@@ -1,8 +1,7 @@
 package com.api.sosremedio.services;
 
-import com.api.sosremedio.DTO.LoginResponse;
+import com.api.sosremedio.dto.response.LoginResponse;
 import com.api.sosremedio.model.UserModel;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
@@ -55,7 +54,7 @@ public class TokenService {
         long expiressInSecond = expirationMinutes * 60;
 
         return new LoginResponse(
-                token, "Barear", expiressInSecond
+                token, "Bearer", expiressInSecond
         );
     }
 }

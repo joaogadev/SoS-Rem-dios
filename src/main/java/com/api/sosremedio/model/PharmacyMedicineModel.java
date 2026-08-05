@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
@@ -34,23 +35,46 @@ public class PharmacyMedicineModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medicine_id", nullable = false)
-    private MedicinesModel medicine;
+    private MedicineModel medicine;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+    private BigDecimal currentPrice;
 
     @Column(name = "stock")
-    private int stock;
+    private Integer stock;
+
+    @Enumerated(EnumType.STRING)
+    @Column(/*name = "availability_status"*/, nullable = false, length = 30)
+    private AvailabilityStatus status = AvailabilityStatus.UNKNOWN;
+
+    @Column(/*name = "last_confirmed_at"*/)
+    private LocalDateTime lastConfirmedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(/*name = "last_confirmed_by"*/)
+    private UserModel lastConfirmedBy;
+
+    @Enumerated(EnumType.STRING)
+    @Column(/*name = "confirmation_source", */length = 30)
+    private ConfirmationSource source;
+
+    @CreationTimestamp
+    @Column(/*name = "created_at", */nullable = false)
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
+    @Column(/*name = "updated_at", */nullable = false)
     private LocalDateTime updatedAt;
 
     public PharmacyMedicineModel(
             PharmacyModel pharmacy,
-            MedicinesModel medicine,
+            MedicineModel medicine,
             BigDecimal price,
-            int stock) {
+            int stock,
+            AvailabilityStatus status,
+            UserModel lastConfirmedBy,
+            ConfirmationSource source
+    ) {
 
         if (stock < 0) {
             throw new IllegalArgumentException("Stock cannot be negative");
@@ -62,8 +86,11 @@ public class PharmacyMedicineModel {
 
         this.pharmacy = pharmacy;
         this.medicine = medicine;
-        this.price = price;
+        this.currentPrice = price;
         this.stock = stock;
+        this.status = status;
+        this.lastConfirmedBy = lastConfirmedBy;
+        this.source = source;
     }
 
     public void updateStock(int stock) {
@@ -78,7 +105,7 @@ public class PharmacyMedicineModel {
         if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Price cannot be zero or negative");
         }
-        this.price = price;
+        this.currentPrice = price;
     }
 
     public boolean hasAvailableStock(int quantity) {

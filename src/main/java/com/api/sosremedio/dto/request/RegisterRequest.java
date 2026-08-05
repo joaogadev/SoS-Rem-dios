@@ -1,10 +1,9 @@
-package com.api.sosremedio.DTO;
+package com.api.sosremedio.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.aspectj.bridge.IMessage;
 
 //não deve receber o usermodel diretamente
 public record RegisterRequest(
@@ -17,7 +16,7 @@ public record RegisterRequest(
 
         @NotBlank(message = "O e-mail é obrigatório.")
         @Email(message = "Informe um email válido")
-        @Size(message = "Email não deve ultrapassar 255 caracteres")
+        @Size(max = 255, message = "Email não deve ultrapassar 255 caracteres")
         String email,
 
         @NotBlank(message = "A senha é obrigatória.")

@@ -37,7 +37,7 @@ public class PharmacyModel {
 
     @JoinColumn(name = "address_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private AdressModel address;
+    private AddressModel address;
 
     @Column(name = "opening_hours")
     private LocalTime openingHours;
@@ -50,7 +50,7 @@ public class PharmacyModel {
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false, updatable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     public PharmacyModel(
@@ -59,7 +59,7 @@ public class PharmacyModel {
             String cnpj,
             String phone,
             String email,
-            AdressModel address,
+            AddressModel address,
             LocalTime openingHours,
             LocalTime closingHours
     ) {
@@ -69,6 +69,17 @@ public class PharmacyModel {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.openingHours = openingHours;
+        this.closingHours = closingHours;
+    }
+
+    public void updateData(
+            String name, String cnpj, String phone, String email, LocalTime openingHours, LocalTime closingHours
+    ) {
+        this.name = name;
+        this.cnpj = cnpj;
+        this.phone = phone;
+        this.email = email;
         this.openingHours = openingHours;
         this.closingHours = closingHours;
     }

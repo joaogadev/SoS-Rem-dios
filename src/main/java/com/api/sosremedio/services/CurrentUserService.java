@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 public class CurrentUserService {
     public UUID getCurrentUserId() {
-        //pega a ficha od usuario autenticado nessa requisição
+        //pega a ficha do usuario autenticado nessa requisição
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {

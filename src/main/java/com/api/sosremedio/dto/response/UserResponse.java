@@ -1,4 +1,4 @@
-package com.api.sosremedio.DTO;
+package com.api.sosremedio.dto.response;
 
 import com.api.sosremedio.model.UserModel;
 import com.api.sosremedio.model.UserRole;
@@ -9,7 +9,7 @@ import java.util.UUID;
 public record UserResponse(
         UUID id,
         String nome,
-        String emial,
+        String email,
         String phone,
         UserRole role
 ) {

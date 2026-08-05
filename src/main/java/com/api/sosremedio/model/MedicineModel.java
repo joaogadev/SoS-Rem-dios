@@ -13,7 +13,7 @@ import java.util.UUID;
 @Table(name = "medicines")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MedicinesModel {
+public class MedicineModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -44,7 +44,7 @@ public class MedicinesModel {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public MedicinesModel(String name, String description, String activeIngredient, String dosage, String pharmaceuticalForm, String manufacturer, boolean requiresPrescription) {
+    public MedicineModel(String name, String description, String activeIngredient, String dosage, String pharmaceuticalForm, String manufacturer, boolean requiresPrescription) {
         this.name = name;
         this.description = description;
         this.activeIngredient = activeIngredient;

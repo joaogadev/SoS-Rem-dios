@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PharmacyMedicineRepository extends JpaRepository<PharmacyMedicineModel, UUID> {
-    boolean existsByPharmacyIdAndMedicineId(UUID pharmacyId, UUID medicineId);
+    boolean existsByPharmacy_IdAndMedicine_Id(UUID pharmacyId, UUID medicineId);
 
-    Optional<PharmacyMedicineModel> findByPharmacyIdAndMedicineId(UUID pharmacyId, UUID medicineId);
+    Optional<PharmacyMedicineModel> findByPharmacy_IdAndMedicine_Id(UUID pharmacyId, UUID medicineId);
 
 }

@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record CreatedAddressRequest(
+public record CreateAddressRequest(
         @NotBlank(message = "O CEP não pode estar vazio")
         @Pattern(
                 regexp = "^[0-9]{8}$",

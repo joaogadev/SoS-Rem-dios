@@ -13,7 +13,7 @@ public record PharmacyResponse(
         String cnpj,
         String phone,
         String email,
-        AddressResponse adress,
+        AddressResponse address,
         LocalTime openingTime,
         LocalTime closingTime
 ) {

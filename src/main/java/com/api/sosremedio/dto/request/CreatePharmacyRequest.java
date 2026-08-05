@@ -15,7 +15,7 @@ public record CreatePharmacyRequest(
         String name,
         @NotBlank(message = "O CNPJ não pode ser vazio")
         @Pattern(
-                regexp = "^\\+?[0-9]{10,15}$",
+                regexp = "^\\+?[0-9]{14}$",
                 message = "O CNPJ deve conter exatamente 14 números"
         )
         String cnpj,
@@ -33,7 +33,7 @@ public record CreatePharmacyRequest(
 
         @NotNull(message = "O endereço não pode ser vazio")
         @Valid
-        CreatedAddressRequest address,
+        CreateAddressRequest address,
 
         @NotNull(message = "Insira o horário de abertura")
         @JsonFormat(pattern = "HH:mm")

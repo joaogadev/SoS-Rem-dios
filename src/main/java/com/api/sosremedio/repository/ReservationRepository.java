@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ReservationRepository extends JpaRepository<ReservationModel, UUID> {
-    List<ReservationModel> findByCustomerId(UUID customerId);
+    List<ReservationModel> findByCustomer_Id(UUID customerId);
 }

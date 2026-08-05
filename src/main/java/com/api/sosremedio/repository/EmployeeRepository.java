@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeModel, UUID> {
-    boolean existsPharmacyByIdAndUserId(UUID pharmacyId, UUID userId);
+    boolean existsPharmacyBy_IdAndUser_Id(UUID pharmacyId, UUID userId);
 }

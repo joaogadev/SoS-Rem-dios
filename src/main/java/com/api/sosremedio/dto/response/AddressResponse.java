@@ -1,4 +1,4 @@
-package com.api.sosremedio.DTO;
+package com.api.sosremedio.dto.response;
 
 import com.api.sosremedio.model.AddressModel;
 

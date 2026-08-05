@@ -1,4 +1,4 @@
-package com.api.sosremedio.DTO;
+package com.api.sosremedio.dto.request;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;

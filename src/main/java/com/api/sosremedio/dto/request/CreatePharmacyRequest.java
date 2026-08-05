@@ -1,4 +1,4 @@
-package com.api.sosremedio.DTO;
+package com.api.sosremedio.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;

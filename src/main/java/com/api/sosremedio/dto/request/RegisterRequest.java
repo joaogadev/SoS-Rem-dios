@@ -1,10 +1,9 @@
-package com.api.sosremedio.DTO;
+package com.api.sosremedio.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.aspectj.bridge.IMessage;
 
 //não deve receber o usermodel diretamente
 public record RegisterRequest(

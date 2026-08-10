@@ -35,6 +35,12 @@ public class PharmacyModel {
     @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
 
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
+
+    @Column(name = "verified", nullable = false)
+    private boolean verified = false;
+
     @JoinColumn(name = "address_id", nullable = false)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private AddressModel address;

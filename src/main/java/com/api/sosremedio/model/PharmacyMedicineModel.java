@@ -37,33 +37,33 @@ public class PharmacyMedicineModel {
     @JoinColumn(name = "medicine_id", nullable = false)
     private MedicineModel medicine;
 
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "current_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal currentPrice;
 
     @Column(name = "stock")
     private Integer stock;
 
     @Enumerated(EnumType.STRING)
-    @Column(/*name = "availability_status"*/, nullable = false, length = 30)
+    @Column(name = "availability_status", nullable = false, length = 30)
     private AvailabilityStatus status = AvailabilityStatus.UNKNOWN;
 
-    @Column(/*name = "last_confirmed_at"*/)
+    @Column(name = "last_confirmed_at")
     private LocalDateTime lastConfirmedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(/*name = "last_confirmed_by"*/)
+    @JoinColumn(name = "last_confirmed_by")
     private UserModel lastConfirmedBy;
 
     @Enumerated(EnumType.STRING)
-    @Column(/*name = "confirmation_source", */length = 30)
+    @Column(name = "confirmation_source", length = 30)
     private ConfirmationSource source;
 
     @CreationTimestamp
-    @Column(/*name = "created_at", */nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(/*name = "updated_at", */nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     public PharmacyMedicineModel(

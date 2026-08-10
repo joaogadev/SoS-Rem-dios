@@ -37,8 +37,14 @@ public class MedicineModel {
     @Column(name = "manufacturer", nullable = false, length = 255)
     private String manufacturer;
 
-    @Column(name = "requires_prescription", nullable = false, length = 255)
+    @Column(name = "requires_prescription", nullable = false)
     private boolean requiresPrescription;
+
+    @Column(name = "ean", length = 20)
+    private String ean;
+
+    @Column(name = "anvisa_registry", length = 50)
+    private String anvisaRegistry;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

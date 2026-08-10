@@ -38,7 +38,7 @@ public class EmployeeModel {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "positiion",  nullable = false, updatable = false)
+    @Column(name = "position",  nullable = false, updatable = false)
     private String position;
 
     public EmployeeModel(PharmacyModel pharmacy,

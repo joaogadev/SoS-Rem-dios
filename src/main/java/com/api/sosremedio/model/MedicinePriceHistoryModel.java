@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "medicine_price_history")
 @Getter
 @NoArgsConstructor
 //guarda cada preço informado ao longo do tempo
@@ -19,26 +20,29 @@ public class MedicinePriceHistoryModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pharmacy_medicine_id", nullable = false)
     private PharmacyMedicineModel pharmacyMedicine;
 
-    @Column(length = 30)
+    @Column(name = "price", length = 30)
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
+    @Column(name = "source", nullable = false, length = 30)
     private ConfirmationSource source;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reported_by", nullable = false)
     private UserModel reportedBy;
 
     @CreationTimestamp
-    @Column(/*name = "created_at",*/ nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public MedicinePriceHistoryModel(PharmacyMedicineModel pharmacyMedicine, BigDecimal price, ConfirmationSource source) {
+    public MedicinePriceHistoryModel(PharmacyMedicineModel pharmacyMedicine, BigDecimal price, ConfirmationSource source, UserModel reportedBy) {
         this.pharmacyMedicine = pharmacyMedicine;
         this.price = price;
         this.source = source;
+        this.reportedBy = reportedBy;
     }
 }

@@ -9,3 +9,7 @@ logging.level.org.springframework.security=DEBUG
 app.jwt.secret=troque-essa-chave-por-uma-chave-com-pelo-menos-32-caracteres
 app.jwt.issuer=sos-remedio-api
 app.jwt.expiration-minutes=60
+
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true

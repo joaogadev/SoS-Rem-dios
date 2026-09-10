@@ -1,9 +1,9 @@
 package com.api.sosremedio.services;
 
-import com.api.sosremedio.DTO.LoginRequest;
-import com.api.sosremedio.DTO.LoginResponse;
-import com.api.sosremedio.DTO.RegisterRequest;
-import com.api.sosremedio.DTO.UserResponse;
+import com.api.sosremedio.dto.request.LoginRequest;
+import com.api.sosremedio.dto.response.LoginResponse;
+import com.api.sosremedio.dto.request.RegisterRequest;
+import com.api.sosremedio.dto.response.UserResponse;
 import com.api.sosremedio.model.UserModel;
 import com.api.sosremedio.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -14,7 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 

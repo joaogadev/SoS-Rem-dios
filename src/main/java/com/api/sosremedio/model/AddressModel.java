@@ -13,7 +13,7 @@ import java.util.UUID;
 @Table(name = "address")
 @Getter
 @NoArgsConstructor
-public class AdressModel {
+public class AddressModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -39,32 +39,22 @@ public class AdressModel {
     @Column(name = "complement", length = 255)
     private String complement;
 
-    @Column(precision = 10, scale = 8)
-    private String latitude;
-
-    @Column(precision = 11, scale = 8)
-    private String longitude;
-
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false, updatable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    public AdressModel(UUID id,
-                       String zipcode,
-                       String state,
-                       String city,
-                       String neighborhood,
-                       String street,
-                       String number,
-                       String complement,
-                       String latitude,
-                       String longitude
+    public AddressModel(String zipcode,
+                        String state,
+                        String city,
+                        String neighborhood,
+                        String street,
+                        String number,
+                        String complement
     ) {
-        this.id = id;
         this.zipcode = zipcode;
         this.state = state;
         this.city = city;
@@ -72,7 +62,5 @@ public class AdressModel {
         this.street = street;
         this.number = number;
         this.complement = complement;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 }

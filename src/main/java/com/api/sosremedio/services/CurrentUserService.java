@@ -1,5 +1,7 @@
 package com.api.sosremedio.services;
 
+import com.api.sosremedio.model.UserModel;
+import com.api.sosremedio.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,8 +13,10 @@ import java.util.UUID;
 
 @Service
 public class CurrentUserService {
+
+    private UserRepository userRepository;
     public UUID getCurrentUserId() {
-        //pega a ficha od usuario autenticado nessa requisição
+        //pega a ficha do usuario autenticado nessa requisição
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
@@ -26,5 +30,12 @@ public class CurrentUserService {
         }
 
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid authentication principal");
+    }
+
+    public UserModel getCurrentUser() {
+        UUID userid = getCurrentUserId();
+
+        return userRepository.findById(userid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 }
